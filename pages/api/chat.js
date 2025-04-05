@@ -34,8 +34,9 @@ Goal: ${userProfile.goal}`;
     const json = await completion.json();
     const reply = json.choices?.[0]?.message?.content || "Sorry, I couldn’t generate a response.";
     res.status(200).json({ reply });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Something went wrong." });
-  }
+} catch (error) {
+  console.error("OPENAI ERROR:", error);
+  const err = await error.response?.text?.();
+  console.error("DETAILS:", err);
+  res.status(500).json({ message: "OpenAI error", error: err || error.message });
 }
