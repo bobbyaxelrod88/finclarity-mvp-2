@@ -69,7 +69,6 @@ if (step < 4) {
   );
 }
 
-
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-6">
       <div className="max-w-2xl mx-auto space-y-8">
