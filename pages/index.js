@@ -1,3 +1,4 @@
+// pages/index.js
 import { useState } from 'react';
 
 export default function Home() {
@@ -27,47 +28,45 @@ export default function Home() {
     setChatHistory((prev) => [...prev, { role: 'assistant', content: data.reply }]);
   };
 
-if (step < 4) {
-  const labels = [
-    "What's your name?",
-    "How old are you?",
-    "What’s your annual income?",
-    "What’s your top financial goal?"
-  ];
-  const keys = ['name', 'age', 'income', 'goal'];
+  if (step < 4) {
+    const questions = [
+      "What's your name?",
+      "How old are you?",
+      "What’s your annual income?",
+      "What’s your top financial goal?"
+    ];
+    const keys = ['name', 'age', 'income', 'goal'];
 
-  return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white px-4">
-      <div className="bg-white w-full max-w-md p-6 rounded-xl shadow-xl space-y-6 text-center">
-        <div className="text-sm text-gray-400">
-          Step {step + 1} of 4
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white px-4">
+        <div className="bg-white w-full max-w-md p-6 rounded-xl shadow-xl space-y-6 text-center">
+          <div className="text-sm text-gray-500">Step {step + 1} of 4</div>
+          <h2 className="text-2xl font-bold text-gray-800">{questions[step]}</h2>
+          <input
+            name={keys[step]}
+            value={formData[keys[step]]}
+            onChange={handleChange}
+            placeholder="Type your answer..."
+            className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            onClick={() => setStep(step + 1)}
+            className="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition"
+          >
+            Next
+          </button>
+          <div className="flex justify-center space-x-2 pt-2">
+            {[0, 1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className={`w-2.5 h-2.5 rounded-full ${i === step ? 'bg-blue-600' : 'bg-gray-300'}`}
+              />
+            ))}
+          </div>
         </div>
-        <h2 className="text-2xl font-bold text-gray-800">{labels[step]}</h2>
-        <input
-          name={keys[step]}
-          value={formData[keys[step]]}
-          onChange={handleChange}
-          placeholder="Type your answer..."
-          className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
-        />
-        <button
-          onClick={() => setStep(step + 1)}
-          className="w-full bg-blue-600 text-white py-2 rounded-md font-medium hover:bg-blue-700 transition"
-        >
-          Next
-        </button>
-        <div className="flex justify-center space-x-2 pt-2">
-          {[0, 1, 2, 3].map((i) => (
-            <div
-              key={i}
-              className={`w-2 h-2 rounded-full ${i === step ? 'bg-blue-600' : 'bg-gray-300'}`}
-            />
-          ))}
-        </div>
-      </div>
-    </main>
-  );
-}
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-6">
