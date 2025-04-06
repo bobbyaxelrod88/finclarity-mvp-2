@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 export default function Home() {
   const [step, setStep] = useState(0);
@@ -27,7 +28,6 @@ export default function Home() {
     setChatHistory((prev) => [...prev, { role: 'assistant', content: data.reply }]);
   };
 
-  // 👇 Onboarding flow
   if (step < 4) {
     const questions = [
       "What's your name?",
@@ -68,7 +68,6 @@ export default function Home() {
     );
   }
 
-  // 👇 Main chat + simulator UI
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-6">
       <div className="max-w-2xl mx-auto space-y-8">
@@ -79,22 +78,11 @@ export default function Home() {
 
           <div className="h-64 overflow-y-auto border border-gray-200 p-4 rounded bg-gray-50 space-y-3 text-sm">
             {chatHistory.map((msg, i) => (
-              <div
-                key={i}
-                className={`p-3 rounded ${
-                  msg.role === 'user'
-                    ? 'bg-blue-100 text-right'
-                    : 'bg-green-100 text-left'
-                }`}
-              >
-                {msg.content}
+              <div key={i} className={`p-3 rounded whitespace-pre-wrap ${msg.role === 'user' ? 'bg-blue-100 text-right' : 'bg-green-100 text-left'}`}>
+                <ReactMarkdown>{msg.content}</ReactMarkdown>
               </div>
             ))}
-            {loading && (
-              <div className="italic text-gray-500 animate-pulse">
-                FinClarity is thinking...
-              </div>
-            )}
+            {loading && <div className="italic text-gray-500 animate-pulse">FinClarity is thinking...</div>}
           </div>
 
           <div className="flex gap-2">
@@ -126,4 +114,3 @@ export default function Home() {
     </main>
   );
 }
-
