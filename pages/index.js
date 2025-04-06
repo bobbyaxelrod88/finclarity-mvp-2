@@ -1,3 +1,4 @@
+
 // pages/index.js
 import { useState } from 'react';
 
@@ -40,7 +41,7 @@ export default function Home() {
     return (
       <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white px-4">
         <div className="bg-white w-full max-w-md p-6 rounded-xl shadow-xl space-y-6 text-center">
-          <div className="text-sm text-gray-500">Step {step + 1} of 4</div>
+          <h2 className="text-2xl font-bold text-red-600">🔥 {questions[step]}</h2>
           <h2 className="text-2xl font-bold text-gray-800">{questions[step]}</h2>
           <input
             name={keys[step]}
